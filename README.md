@@ -1,5 +1,3 @@
-![CI](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg)
-
 # mf-admin
 
 Angular 19 admin panel for managing micro frontends.
