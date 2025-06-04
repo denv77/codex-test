@@ -4,6 +4,7 @@
 
 Angular 19 admin panel for managing micro frontends.
 
+
 ## Setup
 
 ```bash
