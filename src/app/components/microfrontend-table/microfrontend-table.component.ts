@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { MicrofrontendService } from '../../services/microfrontend.service';
 import { Microfrontend } from '../../models/microfrontend';
-import { AgGridAngular } from 'ag-grid-angular';
-import { NbButtonModule, NbIconModule, NbDialogService } from '@nebular/theme';
+import { AgGridModule } from 'ag-grid-angular';
+import { ICellRendererParams } from 'ag-grid-community';
+import { AsyncPipe } from '@angular/common';
+import { NbButtonModule, NbIconModule, NbDialogService, NbDialogModule } from '@nebular/theme';
 import { Observable } from 'rxjs';
 import { MicrofrontendFormComponent } from '../microfrontend-form/microfrontend-form.component';
 
@@ -11,7 +13,7 @@ import { MicrofrontendFormComponent } from '../microfrontend-form/microfrontend-
   templateUrl: './microfrontend-table.component.html',
   styleUrls: ['./microfrontend-table.component.scss'],
   standalone: true,
-  imports: [AgGridAngular, NbButtonModule, NbIconModule, MicrofrontendFormComponent],
+  imports: [AgGridModule, AsyncPipe, NbButtonModule, NbIconModule, NbDialogModule, MicrofrontendFormComponent],
 })
 export class MicrofrontendTableComponent {
   microfrontends$: Observable<Microfrontend[]> = this.service.microfrontends$;
@@ -26,7 +28,7 @@ export class MicrofrontendTableComponent {
     {
       field: 'active',
       editable: true,
-      cellRenderer: (params: any) => (params.value ? '✅' : '❌'),
+      cellRenderer: (params: ICellRendererParams) => (params.value ? '✅' : '❌'),
     },
   ];
 
