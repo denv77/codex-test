@@ -20,6 +20,8 @@ jobs:
         run: npm run lint --if-present
       - name: Build
         run: npm run build --if-present
+      - name: Disable Jekyll
+        run: echo > dist/mf-admin/.nojekyll
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
