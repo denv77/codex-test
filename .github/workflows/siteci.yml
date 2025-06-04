@@ -20,29 +20,32 @@ jobs:
         run: npm run lint --if-present
       - name: Build
         run: npm run build --if-present
+
+      # Спец-артефакт для Pages
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/mf-admin         # корень вашего будущего сайта
+          # name по умолчанию — github-pages, менять не нужно
+
+      # Файл для отключения Jekyll, если нужен
       - name: Disable Jekyll
         run: echo > dist/mf-admin/.nojekyll
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: github-pages
-          path: dist/mf-admin
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     permissions:
+      contents: read      # читать артефакт
       pages: write
       id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: .
+      # Единственный шаг – деплой
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
