@@ -2,7 +2,7 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbDialogModule } from '@nebular/theme';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -10,7 +10,8 @@ export const appConfig: ApplicationConfig = {
       BrowserAnimationsModule,
       NbThemeModule.forRoot({ name: 'default' }),
       NbLayoutModule,
-      RouterModule.forRoot(routes)
+      NbDialogModule.forRoot(),
+      RouterModule.forRoot(routes),
     ),
   ],
 };
